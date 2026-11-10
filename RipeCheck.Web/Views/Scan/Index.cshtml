@@ -1,0 +1,34 @@
+﻿@using RipeCheck.Web.Models
+@{
+    ViewData["Title"] = "Demo OOP RipeCheck";
+    var results = (List<Fruit>)ViewBag.Results;
+    var counts = (Dictionary<string, int>)ViewBag.Counts;
+}
+
+<h2>Demo Konsep OOP RipeCheck</h2>
+
+<h4>Daftar hasil (List dan Generic)</h4>
+<table class="table">
+    <tr>
+        <th>Buah</th><th>Kematangan</th><th>Keyakinan</th><th>Sisa umur simpan</th>
+    </tr>
+    @foreach (var f in results)
+    {
+        <tr>
+            <td>@f.Name</td>
+            <td>@f.Ripeness</td>
+            <td>@((f.Confidence * 100).ToString("0"))%</td>
+            <td>@f.GetShelfLifeDays() hari</td>
+        </tr>
+    }
+</table>
+
+<h4>Ringkasan per kematangan (Dictionary)</h4>
+<ul>
+    @foreach (var pair in counts)
+    {
+        <li>@pair.Key: @pair.Value</li>
+    }
+</ul>
+
+<p>Jumlah buah matang (hasil Filter): @ViewBag.MatangCount</p>
